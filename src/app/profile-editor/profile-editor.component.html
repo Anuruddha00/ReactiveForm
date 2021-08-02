@@ -1,0 +1,47 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" style="width: 60%;position: absolute; left: 35%;">
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" formControlName="firstName" class="form-control">
+    </div>
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" formControlName="lastName" class="form-control">
+    </div>
+
+    <div formGroupName="address" class="form-group col-md-4 mb-3">
+        <h2>Address</h2>
+
+        <label for="street">Street: </label>
+        <input type="text" id="street" formControlName="street" class="form-control">
+
+        <label for="city">City: </label>
+        <input type="text" id="city" formControlName="city" class="form-control">
+
+        <label for="state">State: </label>
+        <input type="text" id="state" formControlName="state" class="form-control">
+
+        <label for="zip">Zip Code: </label>
+        <input type="text" id="zip" formControlName="zip" class="form-control">
+
+    </div>
+
+    <div formArrayName="aliases" class="form-group col-md-4 mb-3">
+        <h2>Aliases</h2>
+        <button (click)="addAlias()" class="btn btn-primary">+ Add another Alias</button>
+
+        <div *ngFor="let alias of aliases.controls; let i=index">
+            <label for="alias-{{i}}">Alias : </label>
+            <input type="text" id="alias-{{i}}" [formControlName]="i" class="form-control">
+        </div>
+
+    </div>
+
+    <p>complete the form to enable form</p>
+    <button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid">Submit</button>
+    <button (click)="updateProfile()" class="btn btn-primary" style="margin-left: 10px;">Update Profile</button>
+
+    <p>Form Status : {{profileForm.status}}</p>
+</form>
